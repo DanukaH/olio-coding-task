@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Olio Coding Task</title>
+    <title>OLIO Coding Task</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,16 @@
   </head>
 
   <body>
-    <%= yield %>
+  <%= render 'layouts/shared/nav' %>
+  <%= render 'layouts/shared/notice' %>
+  <main class="flex-shrink-0">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col my-5">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </main>
   </body>
 </html>
