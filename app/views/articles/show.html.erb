@@ -1,0 +1,25 @@
+
+<h2>
+  Article Details
+</h2>
+
+<div class="row d-flex zindex-sticky">
+  <div class="col" >
+    <div class="d-grid py-5 d-md-flex justify-content-start">
+      <%= link_to "Back", articles_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow mt-4 mb-5">
+  <div class="card-body lead">
+    <dl class="row">
+      <dt class="col-sm-3">Article Title</dt>
+      <dd class="col-sm-9"><%= @article['title'] %></dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-3">Article Description</dt>
+      <dd class="col-sm-9"><%= @article['description'] %></dd>
+    </dl>
+  </div>
+</div>
