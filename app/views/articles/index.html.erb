@@ -5,17 +5,19 @@
 
 <div class="card shadow mb-4 mt-5">
   <div class="card-body">
-    <table class="table table-sm">
+    <table class="table table-sm table-hover">
       <thead class="lead fw-bolder">
       <tr>
         <th scope="col">Article Name</th>
+        <th scope="col">Likes</th>
         <th scope="col">Date Created</th>
       </tr>
       </thead>
       <tbody class="lead">
-      <% @articles.each do |article| %>
+      <% @articles.zip(@local_articles).each do |(article, local_article)| %>
         <tr>
           <td><%= link_to(article['title'], article_path(id: article['id'])) %></td>
+          <td><%= local_article.like_count + article['reactions']['likes'].to_i %></td>
           <td><%= article['created_at'].to_datetime.strftime('%a, %d %b %Y %H:%M:%S') %></td>
         </tr>
       <% end %>
