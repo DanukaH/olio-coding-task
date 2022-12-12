@@ -10,10 +10,10 @@ class ArticlesController < ApplicationController
   # In show, if finds the record in jason as well as the matching record in app Db table
   def show
     @article = @articles.find { |article| article['id'] == params[:id].to_i }
-    @local_article = @local_articles.find_by(article_unique_id: @article['id'].to_i)
+    @local_article = @local_articles.find_by(article_unique_id: @article['id'].to_i) if @article.present?
   end
 
-  # Custom action 'like': 
+  # Custom action 'like':
   # - Select the local article record by article ID from the server.
   # - Updates the local like count for the particular article record.
   # - Creates a record in like table to represent the relationship between articles and users.
@@ -41,7 +41,7 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:article_unique_id, :like_count)
   end
 
-  # Load articles from server everytime app loads index and show pages to capture and display article details 
+  # Load articles from server everytime app loads index and show pages to capture and display article details
   # straight from the server.
   def load_articles
     url = 'https://s3-eu-west-1.amazonaws.com/olio-staging-images/developer/test-articles-v4.json'

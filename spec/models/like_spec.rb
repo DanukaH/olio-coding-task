@@ -1,5 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Like, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Like do
+  describe 'factory' do
+    let!(:article) { FactoryBot.build(:article) }
+    let!(:user) { FactoryBot.build(:user) }
+    let!(:like) { FactoryBot.build(:like, user: user, article: article) }
+
+    it 'produces a valid object' do
+      expect(like).to be_valid
+    end
+  end
 end
