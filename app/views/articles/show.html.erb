@@ -3,14 +3,6 @@
   Article Details
 </h2>
 
-<div class="row d-flex zindex-sticky">
-  <div class="col" >
-    <div class="d-grid py-5 d-md-flex justify-content-start">
-      <%= link_to "Back", articles_path, class: "btn btn-secondary" %>
-    </div>
-  </div>
-</div>
-
 <div class="card shadow mt-4 mb-5">
   <div class="card-body lead">
     <dl class="row">
@@ -25,15 +17,34 @@
       <dt class="col-sm-3">Like?</dt>
       <dd class="col-sm-9">
         <% if user_signed_in? %>
-          <% if @local_article.liked?(current_user) %>
-            <%= button_to ' Liked', {}, disabled: true, class: "btn btn-secondary bi bi-hand-thumbs-up" %>
-          <% else %>
-            <%= button_to ' Like', like_path(@local_article), method: :put,
-                          params: { article: { article_unique_id: @local_article.article_unique_id, like_count: @local_article.like_count + 1 } },
-                          class: "btn btn-success bi bi-hand-thumbs-up" %>
-          <% end %>
+          <div class="row">
+            <% if @local_article.liked?(current_user) %>
+              <div class="col-auto">
+                <%= button_to ' Liked', {}, disabled: true, class: "d-inline btn btn-secondary bi bi-hand-thumbs-up" %>
+              </div>
+              <div class="col-auto">
+                <%= @local_article.like_count %>
+              </div>
+            <% else %>
+              <div class="col-auto">
+                <%= button_to ' Like', like_path(@local_article), method: :put,
+                              params: { article: { article_unique_id: @local_article.article_unique_id, like_count: @local_article.like_count + 1 } },
+                              class: "d-inline btn btn-primary bi bi-hand-thumbs-up" %>
+              </div>
+              <div class="col-auto">
+                <%= @local_article.like_count %>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </dd>
     </dl>
+  </div>
+</div>
+<div class="row d-flex zindex-sticky">
+  <div class="col" >
+    <div class="d-grid py-5 d-md-flex justify-content-start">
+      <%= link_to "< Back to Articles", articles_path, class: "btn btn-secondary" %>
+    </div>
   </div>
 </div>

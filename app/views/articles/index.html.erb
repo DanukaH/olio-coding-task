@@ -28,7 +28,7 @@
                 <%= button_to ' Like', like_path(local_article), method: :put,
                               params: { article: { article_unique_id: local_article.article_unique_id,
                                                    like_count: local_article.like_count + 1, redirection: 'index'} },
-                              class: "btn btn-success bi bi-hand-thumbs-up" %>
+                              class: "btn btn-primary bi bi-hand-thumbs-up" %>
               <% end %>
             <% end %>
           </td>
