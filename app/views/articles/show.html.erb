@@ -21,5 +21,19 @@
       <dt class="col-sm-3">Article Description</dt>
       <dd class="col-sm-9"><%= @article['description'] %></dd>
     </dl>
+    <dl class="row">
+      <dt class="col-sm-3">Like?</dt>
+      <dd class="col-sm-9">
+        <% if user_signed_in? %>
+          <% if @local_article.liked?(current_user) %>
+            <%= button_to ' Liked', {}, disabled: true, class: "btn btn-secondary bi bi-hand-thumbs-up" %>
+          <% else %>
+            <%= button_to ' Like', like_path(@local_article), method: :put,
+                          params: { article: { article_unique_id: @local_article.article_unique_id, like_count: @local_article.like_count + 1 } },
+                          class: "btn btn-success bi bi-hand-thumbs-up" %>
+          <% end %>
+        <% end %>
+      </dd>
+    </dl>
   </div>
 </div>

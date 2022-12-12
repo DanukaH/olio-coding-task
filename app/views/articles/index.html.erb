@@ -11,6 +11,7 @@
         <th scope="col">Article Name</th>
         <th scope="col">Likes</th>
         <th scope="col">Date Created</th>
+        <th scope="col">Like?</th>
       </tr>
       </thead>
       <tbody class="lead">
@@ -19,6 +20,18 @@
           <td><%= link_to(article['title'], article_path(id: article['id'])) %></td>
           <td><%= local_article.like_count + article['reactions']['likes'].to_i %></td>
           <td><%= article['created_at'].to_datetime.strftime('%a, %d %b %Y %H:%M:%S') %></td>
+          <td>
+            <% if user_signed_in? %>
+              <% if local_article.liked?(current_user) %>
+                <%= button_to ' Liked', {}, disabled: true, class: "btn btn-secondary bi bi-hand-thumbs-up" %>
+              <% else %>
+                <%= button_to ' Like', like_path(local_article), method: :put,
+                              params: { article: { article_unique_id: local_article.article_unique_id,
+                                                   like_count: local_article.like_count + 1, redirection: 'index'} },
+                              class: "btn btn-success bi bi-hand-thumbs-up" %>
+              <% end %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>

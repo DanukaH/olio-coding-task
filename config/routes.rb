@@ -14,5 +14,11 @@ Rails.application.routes.draw do
   get 'home/index'
   root to: 'home#index'
 
-  resources :articles, only: %i[index show]
+  resources :articles, only: %i[index show] do
+    member do
+      put :like
+    end
+  end
+
+  put '/article/:id/like', to: 'articles#like', as: 'like'
 end
