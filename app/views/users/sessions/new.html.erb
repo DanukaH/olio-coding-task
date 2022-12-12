@@ -4,7 +4,7 @@
 
     <div class="card-body">
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
         <div class="field">
           <div class="mb-3 row">
             <label for="staticEmail" class="col-sm-3 col-form-label">Email</label>
